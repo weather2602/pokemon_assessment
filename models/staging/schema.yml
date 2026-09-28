@@ -1,0 +1,93 @@
+version: 2
+
+models:
+  - name: stg_pokemon_a
+    description: "Staging view normalizing and casting Raw Pokemon Source A."
+    columns:
+      - name: pokemon_id
+        description: "The Pokédex ID of the Pokemon. Not unique due to mega evolutions."
+        tests:
+          - not_null
+      - name: pokemon_name
+        description: "Natural key used to identify a distinct Pokemon/form within the provided source datasets."
+        tests:
+          - not_null
+          - unique
+      - name: primary_type
+        description: "The primary elemental type."
+        tests:
+          - not_null
+      - name: generation
+        description: "The generation of introduction."
+        tests:
+          - not_null
+      - name: source_file
+        description: "Lineage identifier for tracking record origin."
+        tests:
+          - not_null
+      - name: ingested_at
+        description: "Standard pipeline-lineage timestamp of when the record was processed."
+        tests:
+          - not_null
+
+  - name: stg_pokemon_b
+    description: "Staging view normalizing, casting, and deduplicating Raw Pokemon Source B."
+    columns:
+      - name: pokemon_id
+        description: "The Pokédex ID of the Pokemon. Not unique due to mega evolutions."
+        tests:
+          - not_null
+      - name: pokemon_name
+        description: "Natural key used to identify a distinct Pokemon/form within the provided source datasets."
+        tests:
+          - not_null
+          - unique
+      - name: primary_type
+        description: "The primary elemental type."
+        tests:
+          - not_null
+      - name: generation
+        description: "The generation of introduction."
+        tests:
+          - not_null
+      - name: source_file
+        description: "Lineage identifier for tracking record origin."
+        tests:
+          - not_null
+      - name: ingested_at
+        description: "Standard pipeline-lineage timestamp of when the record was processed."
+        tests:
+          - not_null
+
+  - name: stg_pokemon_unified
+    description: "The consolidated staging layer representing a clean, type-safe, and deduplicated union of Source A and Source B."
+    columns:
+      - name: pokemon_id
+        description: "The Pokédex ID of the Pokemon."
+        tests:
+          - not_null
+      - name: pokemon_name
+        description: "Natural key used to identify a distinct Pokemon/form within the provided source datasets."
+        tests:
+          - not_null
+          - unique
+      - name: primary_type
+        description: "The primary elemental type."
+        tests:
+          - not_null
+      - name: generation
+        description: "The generation of introduction."
+        tests:
+          - not_null
+      - name: is_legendary
+        description: "Boolean indicating whether the Pokemon is legendary."
+        tests:
+          - not_null
+      - name: source_file
+        description: "Lineage identifier for tracking record origin."
+        tests:
+          - not_null
+      # - name: ingested_at
+      #   description: "Standard pipeline-lineage timestamp of when the record was processed."
+      #   tests:
+      #     - not_null

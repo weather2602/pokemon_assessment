@@ -1,0 +1,14 @@
+version: 2
+
+sources:
+  - name: raw_sources
+    description: "External raw JSON source files, mapped directly via dbt-duckdb config. This decouples our models from physical file paths."
+    tables:
+      - name: pokemon_source_a
+        description: "Raw Pokemon Feed A"
+        config:
+          external_location: "pokemon-source-a.json"
+      - name: pokemon_source_b
+        description: "Raw Pokemon Feed B"
+        config:
+          external_location: "pokemon-source-b.json"

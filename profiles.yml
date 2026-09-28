@@ -1,0 +1,25 @@
+pokemon_profile:
+  outputs:
+    dev:
+      type: duckdb
+      path: dev.duckdb
+
+    # Example BigQuery target for production:
+    #
+    # prod:
+    #   type: bigquery
+    #   method: oauth
+    #   project: gcp-project
+    #   dataset: pokemon_curated
+    #   threads: 4
+    #   location: EU
+    #   priority: interactive
+    #
+    # Then change the active target:
+    #
+    # target: prod
+    #
+    # In a real deployment, credentials/environment configuration
+    # would be managed outside this repository.
+
+  target: dev
